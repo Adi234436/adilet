@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import Choices
+from account.models import User
 
 
 
@@ -23,8 +24,10 @@ class Product(CreatedAtModel):
     def __str__(self):
         return self.title
 
+
 class ProductReview(CreatedAtModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews', null=True)
     text = models.TextField()
     reting = models.PositiveIntegerField(default=1)
 
